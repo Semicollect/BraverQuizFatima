@@ -26,7 +26,7 @@ public class GameController : MonoBehaviour {
     {
         if (_state == State.BattleStart)
         {
-			if( player.transform.localPosition.x < -2 ){
+			if( player.transform.localPosition.x < -1.7 ){
 				player.transform.Translate(0.1f, 0, 0);
 			}
         }
