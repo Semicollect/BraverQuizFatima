@@ -432,6 +432,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 944253702}
   monster: {fileID: 100000, guid: b2e331aa9c9653c4492a05723e51f8c9, type: 2}
+  planeGround: {fileID: 348363121}
+  Q: {fileID: 515920087}
+  A: {fileID: 1018595482}
+  B: {fileID: 1345822252}
+  C: {fileID: 2125697037}
+  D: {fileID: 1919577053}
 --- !u!4 &580446978
 Transform:
   m_ObjectHideFlags: 0
