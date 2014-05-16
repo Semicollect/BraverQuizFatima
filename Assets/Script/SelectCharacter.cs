@@ -11,14 +11,19 @@ public class SelectCharacter : MonoBehaviour {
 	private bool fadeOut = false;
 	// Use this for initialization
 	void Start () {
+        
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (fadeOut) {
 			if( touchBg.transform.localScale.y < 20 ){
-				touchBg.transform.localScale += new Vector3(0, 0.3f, 0);
+				touchBg.transform.localScale += new Vector3(0, 0.5f, 0);
 			}
+            else
+            {
+                Application.LoadLevel("Battle");
+            }
 		}
 		else if ( Input.GetMouseButtonUp(0) || Input.touchCount > 0 ) {
 			Ray ray;
@@ -30,14 +35,17 @@ public class SelectCharacter : MonoBehaviour {
 					case "knight":
 						Destroy(archerBg); Destroy(archerPeople); Destroy(archerFont);
 						Destroy(magicianBg); Destroy(magicianPeople); Destroy(magicianFont);
+                        Character.PlayerType = Character.Type.Knight;
 					break;
 					case "archer":
 						Destroy(knightBg); Destroy(knightPeople); Destroy(knightFont);
 						Destroy(magicianBg); Destroy(magicianPeople); Destroy(magicianFont);
+                        Character.PlayerType = Character.Type.Archer;
 						break;
 					case "magician":
 						Destroy(archerBg); Destroy(archerPeople); Destroy(archerFont);
 						Destroy(knightBg); Destroy(knightPeople); Destroy(knightFont);
+                        Character.PlayerType = Character.Type.Magician;
 						break;
 				}
 				touchBg = hit.collider.gameObject;

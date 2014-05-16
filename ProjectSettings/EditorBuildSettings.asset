@@ -9,3 +9,5 @@ EditorBuildSettings:
     path: Assets/Scene/StartScreen.unity
   - enabled: 1
     path: Assets/Scene/SelectCharacter.unity
+  - enabled: 1
+    path: Assets/Scene/Battle.unity
