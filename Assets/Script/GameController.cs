@@ -14,6 +14,13 @@ public class GameController : MonoBehaviour {
 	public GameObject monster;
 	public GameObject planeGround;
 
+    public GameObject enemyParticle;
+    private bool enemyParticleExec = false;
+    public GameObject playerParticle;
+    private bool playerParticleExec = false;
+    private float lifeValue;
+
+
 	public GameObject lifeBar;
 
 	public GameObject Q, A, B, C, D;
@@ -201,14 +208,24 @@ public class GameController : MonoBehaviour {
 	void AnswerWrong(){
 		if( _state == State.AnswerWrong ){
 			if( GUIDisppear()){
-				if (lifeBar.transform.position.x > -0.5f) {
-					lifeBar.transform.Translate (-0.4f, 0, 0);
-					if( lifeBar.transform.position.x < -0.5f ){
-						_state = State.PlayerDead;
-					}
-					else{
-						_state = State.MonsterAppear;
-					}
+                if (!playerParticleExec)
+                {
+                    playerParticle.particleEmitter.Emit();
+                    lifeValue = 0.4f;
+                    playerParticleExec = true;
+                }
+                if (lifeValue > 0)
+                {
+                    lifeBar.transform.Translate(-0.025f, 0, 0);
+                    lifeValue -= 0.025f;
+                }
+				else if( lifeBar.transform.position.x < -0.5f ){
+                    playerParticleExec = false;
+					_state = State.PlayerDead;
+				}
+				else{
+                    playerParticleExec = false;
+					_state = State.MonsterAppear;
 				}
 			}
 		}
@@ -217,11 +234,17 @@ public class GameController : MonoBehaviour {
 	void AnswerRight(){
 		if( _state == State.AnswerRight ){
 			if( GUIDisppear()){
+                if (!enemyParticleExec)
+                {
+                    enemyParticle.particleEmitter.Emit();
+                    enemyParticleExec = true;
+                }
 				if( _nowMonster.renderer.material.color.a > 0){
 					_nowMonster.renderer.material.color -= new Color(0, 0, 0, 0.1f);
 				}
 				else{
 					_timer = 0;
+                    enemyParticleExec = false;
 					Destroy( _nowMonster );
 					Character.score += 1;
 					planeGround.GetComponent<Animator>().enabled = true;
