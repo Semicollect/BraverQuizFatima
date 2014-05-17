@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class GameController : MonoBehaviour {
 
     public enum State { None, BattleStart, Running, MonsterAppear, 
-		DisplayQuestion, WaitingRequest, AnswerRight, AnswerWrong };
+		DisplayQuestion, WaitingRequest, AnswerRight, AnswerWrong, PlayerDead,
+		MonsterDead };
     private State _state = State.BattleStart;
 
     public GameObject player;
@@ -13,6 +14,8 @@ public class GameController : MonoBehaviour {
 	public GameObject magician;
 	public GameObject monster;
 	public GameObject planeGround;
+
+	public GameObject lifeBar;
 
 	public GameObject Q, A, B, C, D;
 
@@ -43,6 +46,8 @@ public class GameController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		AnswerRight ();
+		AnswerWrong ();
 		WaitingRequest ();
 		DisplayQuestion ();
 		MonsterAppear ();
@@ -151,6 +156,7 @@ public class GameController : MonoBehaviour {
 
 				print( hitObject );
 				if( hitObject != null && (hitObject.tag == "A" || hitObject.tag == "B" || hitObject.tag == "C" || hitObject.tag == "D") ){
+					_touchBg = GameObject.Find("battle_" + hitObject.tag);
 					if( hitObject.tag[0]-'A'+1 == Question.questions[_questionNumber].answer ){
 						_state = State.AnswerRight;
 					}
@@ -159,6 +165,69 @@ public class GameController : MonoBehaviour {
 					}
 
 					print (_state);
+				}
+			}
+		}
+	}
+
+	bool GUIDisppear(){
+		if (_touchBg.guiTexture.color.g < 0.7f && _touchBg.guiTexture.color.r < 0.7f) {
+			if( _state == State.AnswerRight ){
+				_touchBg.guiTexture.color += new Color(0, 0.1f, 0);
+			}
+			else{
+				_touchBg.guiTexture.color += new Color(0.1f, 0, 0);
+			}
+		}
+		else if( Q.guiTexture.color.a > 0 ){
+			Q.guiTexture.color -= new Color( 0, 0, 0, 0.05f );
+		}
+		else if( A.transform.position.x > -2 ){
+			A.transform.Translate(-0.1f, 0, 0, 0);
+		}
+		else if( B.transform.position.x < 2 ){			
+			B.transform.Translate(0.1f, 0, 0, 0);
+		}
+		else if( C.transform.position.x > -2 ){
+			C.transform.Translate(-0.1f, 0, 0, 0);
+		}
+		else if( D.transform.position.x < 2 ){
+			D.transform.Translate(0.1f, 0, 0, 0);
+		}
+		else {
+			_touchBg.guiTexture.color = new Color(0.5f, 0.5f, 0.5f, 0.5f);
+			return true;
+		}
+		return false;
+	}
+
+	void AnswerWrong(){
+		if( _state == State.AnswerWrong ){
+			if( GUIDisppear()){
+				if (lifeBar.transform.position.x > -0.5f) {
+					lifeBar.transform.Translate (-0.4f, 0, 0);
+					if( lifeBar.transform.position.x < -0.5f ){
+						_state = State.PlayerDead;
+					}
+					else{
+						_state = State.MonsterAppear;
+					}
+				}
+			}
+		}
+	}
+
+	void AnswerRight(){
+		if( _state == State.AnswerRight ){
+			if( GUIDisppear()){
+				if( _nowMonster.renderer.material.color.a > 0){
+					_nowMonster.renderer.material.color -= new Color(0, 0, 0, 0.1f);
+				}
+				else{
+					_timer = 0;
+					Destroy( _nowMonster );
+					planeGround.GetComponent<Animator>().enabled = true;
+					_state = State.Running;
 				}
 			}
 		}
