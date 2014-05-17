@@ -414,6 +414,7 @@ GameObject:
   - 33: {fileID: 528546496}
   - 64: {fileID: 528546495}
   - 23: {fileID: 528546494}
+  - 95: {fileID: 528546498}
   m_Layer: 0
   m_Name: Plane_Cloud_1
   m_TagString: Untagged
@@ -473,6 +474,20 @@ Transform:
   m_LocalScale: {x: .0700000003, y: .0500000007, z: .0700000003}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!95 &528546498
+Animator:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 528546493}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: dc3f8e8aa1d33884c88d5e0ed69e72ae, type: 2}
+  m_CullingMode: 0
+  m_ApplyRootMotion: 1
+  m_AnimatePhysics: 0
+  m_HasTransformHierarchy: 1
 --- !u!1 &580446976
 GameObject:
   m_ObjectHideFlags: 0
@@ -982,6 +997,7 @@ GameObject:
   - 33: {fileID: 1291342306}
   - 64: {fileID: 1291342305}
   - 23: {fileID: 1291342304}
+  - 95: {fileID: 1291342308}
   m_Layer: 0
   m_Name: Plane_Cloud_2
   m_TagString: Untagged
@@ -1041,6 +1057,20 @@ Transform:
   m_LocalScale: {x: .119999997, y: .100000001, z: .0700000003}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!95 &1291342308
+Animator:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1291342303}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: aaca6060b2f95954abd6951c870a2fb1, type: 2}
+  m_CullingMode: 0
+  m_ApplyRootMotion: 1
+  m_AnimatePhysics: 0
+  m_HasTransformHierarchy: 1
 --- !u!1 &1345822252
 GameObject:
   m_ObjectHideFlags: 0
@@ -1099,6 +1129,7 @@ GameObject:
   - 33: {fileID: 1621229726}
   - 64: {fileID: 1621229725}
   - 23: {fileID: 1621229724}
+  - 95: {fileID: 1621229728}
   m_Layer: 0
   m_Name: Plane_Cloud_3
   m_TagString: Untagged
@@ -1158,6 +1189,20 @@ Transform:
   m_LocalScale: {x: .0500000007, y: .0500000007, z: .0500000007}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!95 &1621229728
+Animator:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1621229723}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a66d5d6bc8c862c43b20c44e19a8d3da, type: 2}
+  m_CullingMode: 0
+  m_ApplyRootMotion: 1
+  m_AnimatePhysics: 0
+  m_HasTransformHierarchy: 1
 --- !u!1 &1650780707
 GameObject:
   m_ObjectHideFlags: 0
@@ -1215,6 +1260,7 @@ GameObject:
   - 33: {fileID: 1720193561}
   - 64: {fileID: 1720193560}
   - 23: {fileID: 1720193559}
+  - 95: {fileID: 1720193563}
   m_Layer: 0
   m_Name: Plane_Cloud_0
   m_TagString: Untagged
@@ -1274,6 +1320,20 @@ Transform:
   m_LocalScale: {x: .119999997, y: .100000001, z: .0700000003}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!95 &1720193563
+Animator:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1720193558}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0472babe04722734eb1ca515a6924212, type: 2}
+  m_CullingMode: 0
+  m_ApplyRootMotion: 1
+  m_AnimatePhysics: 0
+  m_HasTransformHierarchy: 1
 --- !u!1 &1769112881
 GameObject:
   m_ObjectHideFlags: 0
