@@ -4,8 +4,7 @@ using System.Collections;
 public class GameController : MonoBehaviour {
 
     public enum State { None, BattleStart, Running, MonsterAppear, 
-		DisplayQuestion, WaitingRequest, AnswerRight, AnswerWrong, PlayerDead,
-		MonsterDead };
+		DisplayQuestion, WaitingRequest, AnswerRight, AnswerWrong, PlayerDead };
     private State _state = State.BattleStart;
 
     public GameObject player;
@@ -46,6 +45,7 @@ public class GameController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		PlayerDead ();
 		AnswerRight ();
 		AnswerWrong ();
 		WaitingRequest ();
@@ -229,6 +229,18 @@ public class GameController : MonoBehaviour {
 					planeGround.GetComponent<Animator>().enabled = true;
 					_state = State.Running;
 				}
+			}
+		}
+	}
+
+	void PlayerDead(){
+		if (_state == State.PlayerDead) {
+			SpriteRenderer sprite = player.GetComponentInChildren<SpriteRenderer>();
+			if( sprite.color.a > 0 ){
+				sprite.color -= new Color(0, 0, 0, 0.1f);
+			}
+			else{
+				Application.LoadLevel("grade");
 			}
 		}
 	}

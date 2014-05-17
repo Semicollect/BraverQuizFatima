@@ -11,3 +11,5 @@ EditorBuildSettings:
     path: Assets/Scene/SelectCharacter.unity
   - enabled: 1
     path: Assets/Scene/Battle.unity
+  - enabled: 1
+    path: Assets/Scene/grade.unity
