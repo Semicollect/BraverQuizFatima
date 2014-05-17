@@ -90,6 +90,7 @@ public class GameController : MonoBehaviour {
 		if( _state == State.MonsterAppear ){
 			if( _nowMonster == null ){
 				(_nowMonster = (Object.Instantiate(monster) as GameObject)).transform.position = new Vector3(4.45f, 1.40f, 17f);
+				_nowMonster.renderer.material.color = new Color( Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f) );
 				planeGround.GetComponent<Animator>().enabled = false;
 			}
 			else if(_nowMonster.transform.position.x > 1.1f){
