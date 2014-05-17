@@ -8,6 +8,9 @@ public class GameController : MonoBehaviour {
     private State _state = State.BattleStart;
 
     public GameObject player;
+	public GameObject knight;
+	public GameObject archer;
+	public GameObject magician;
 	public GameObject monster;
 	public GameObject planeGround;
 
@@ -22,6 +25,16 @@ public class GameController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Question.CreateQuestions ();
+		print (Character.PlayerType);
+		if (Character.PlayerType != Character.Type.Knight) {
+			Destroy(knight);
+		}
+		if (Character.PlayerType != Character.Type.Archer) {
+			Destroy(archer);
+		}
+		if (Character.PlayerType != Character.Type.Magician) {
+			Destroy(magician);
+		}
 		//player.GetComponent<SpriteRenderer>().sprite = knightSprite;
 		//player.GetComponent<Animator>().runtimeAnimatorController = knightAnimatorController;
 		//player.transform.localEulerAngles = new Vector3 (0, 180, 0);
