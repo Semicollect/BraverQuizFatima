@@ -86,17 +86,34 @@ public class GameController : MonoBehaviour {
 			if( Q.guiTexture.color.a < 1 ){
 				Q.guiTexture.color += new Color( 0, 0, 0, 0.05f );
 			}
-			else if( A.transform.position.x < 0.5 ){
+			else if( A.transform.position.x < 0.35 ){
 				A.transform.Translate(0.1f, 0, 0, 0);
+                if (A.transform.position.x > 0.35)
+                {
+                    A.transform.position.Set(0.35f, A.transform.position.y, A.transform.position.z);
+                }
 			}
-			else if( B.transform.position.x > 0.5 ){
+			else if( B.transform.position.x > 0.66 ){
+                
 				B.transform.Translate(-0.1f, 0, 0, 0);
+                if (B.transform.position.x < 0.66)
+                {
+                    B.transform.position.Set(0.66f, B.transform.position.y, B.transform.position.z);
+                }
 			}
-			else if( C.transform.position.x < 0.5 ){
+			else if( C.transform.position.x < 0.35 ){
 				C.transform.Translate(0.1f, 0, 0, 0);
+                if (C.transform.position.x > 0.35)
+                {
+                    C.transform.position.Set(0.35f, C.transform.position.y, C.transform.position.z);
+                }
 			}
-			else if( D.transform.position.x > 0.5 ){
+			else if( D.transform.position.x > 0.66 ){
 				D.transform.Translate(-0.1f, 0, 0, 0);
+                if (D.transform.position.x < 0.66)
+                {
+                    D.transform.position.Set(0.66f, D.transform.position.y, D.transform.position.z);
+                }
 			}
 		}
 
