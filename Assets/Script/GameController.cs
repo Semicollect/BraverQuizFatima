@@ -3,7 +3,8 @@ using System.Collections;
 
 public class GameController : MonoBehaviour {
 
-    public enum State { None, BattleStart, Running, MonsterAppear, DisplayQuestion };
+    public enum State { None, BattleStart, Running, MonsterAppear, 
+		DisplayQuestion, WaitingRequest, AnswerRight, AnswerWrong };
     private State _state = State.BattleStart;
 
     public GameObject player;
@@ -15,9 +16,12 @@ public class GameController : MonoBehaviour {
 	private GameObject _nowMonster = null;
 	private int _timer = 0;
 	private bool _questionSelected = false;
+	private int _questionNumber = 0;
+	private GameObject _touchBg;
 
 	// Use this for initialization
 	void Start () {
+		Question.CreateQuestions ();
 		//player.GetComponent<SpriteRenderer>().sprite = knightSprite;
 		//player.GetComponent<Animator>().runtimeAnimatorController = knightAnimatorController;
 		//player.transform.localEulerAngles = new Vector3 (0, 180, 0);
@@ -26,6 +30,7 @@ public class GameController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		WaitingRequest ();
 		DisplayQuestion ();
 		MonsterAppear ();
 		Running ();
@@ -75,11 +80,12 @@ public class GameController : MonoBehaviour {
 	void DisplayQuestion(){
 		if (_state == State.DisplayQuestion) {
 			if( !_questionSelected ){
-				Q.GetComponentInChildren<GUIText>().text = "今年是幾年？";
-				A.GetComponentInChildren<GUIText>().text = "2012";
-				B.GetComponentInChildren<GUIText>().text = "2013";
-				C.GetComponentInChildren<GUIText>().text = "2014";
-				D.GetComponentInChildren<GUIText>().text = "2015";
+				_questionNumber = Random.Range (0, Question.questions.Count-1);
+				Q.GetComponentInChildren<GUIText>().text = Question.questions[_questionNumber].statement;
+				A.GetComponentInChildren<GUIText>().text = Question.questions[_questionNumber].a;
+				B.GetComponentInChildren<GUIText>().text = Question.questions[_questionNumber].b;
+				C.GetComponentInChildren<GUIText>().text = Question.questions[_questionNumber].c;
+				D.GetComponentInChildren<GUIText>().text = Question.questions[_questionNumber].d;
 				_questionSelected = true;
 			}
 
@@ -98,7 +104,33 @@ public class GameController : MonoBehaviour {
 			else if( D.transform.position.x > 0.5 ){
 				D.transform.Translate(-0.1f, 0, 0, 0);
 			}
+			else {
+				_state = State.WaitingRequest;
+			}
 		}
 
+	}
+
+	void WaitingRequest(){
+		if (_state == State.WaitingRequest) {
+			if ( Input.GetMouseButtonUp(0) || Input.touchCount > 0 ) {
+				GUILayer hit = Camera.main.GetComponent<GUILayer>();
+				GUIElement hitObject;
+				if ( Input.GetMouseButtonUp(0) ) hitObject = hit.HitTest(Input.mousePosition);
+				else hitObject = hit.HitTest(Input.touches[0].position);
+
+				print( hitObject );
+				if( hitObject != null && (hitObject.tag == "A" || hitObject.tag == "B" || hitObject.tag == "C" || hitObject.tag == "D") ){
+					if( hitObject.tag[0]-'A'+1 == Question.questions[_questionNumber].answer ){
+						_state = State.AnswerRight;
+					}
+					else{
+						_state = State.AnswerWrong;
+					}
+
+					print (_state);
+				}
+			}
+		}
 	}
 }
