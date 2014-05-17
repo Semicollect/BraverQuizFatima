@@ -27,7 +27,7 @@ public class GameController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Question.CreateQuestions ();
-		print (Character.PlayerType);
+		Character.score = 0;
 		if (Character.PlayerType != Character.Type.Knight) {
 			Destroy(knight);
 		}
@@ -83,6 +83,7 @@ public class GameController : MonoBehaviour {
 		if( _state == State.MonsterAppear ){
 			if( _nowMonster == null ){
 				(_nowMonster = (Object.Instantiate(monster) as GameObject)).transform.position = new Vector3(4.45f, 1.40f, 17f);
+				_nowMonster.renderer.material.color = new Color( Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f) );
 				planeGround.GetComponent<Animator>().enabled = false;
 			}
 			else if(_nowMonster.transform.position.x > 1.1f){
@@ -154,7 +155,6 @@ public class GameController : MonoBehaviour {
 				if ( Input.GetMouseButtonUp(0) ) hitObject = hit.HitTest(Input.mousePosition);
 				else hitObject = hit.HitTest(Input.touches[0].position);
 
-				print( hitObject );
 				if( hitObject != null && (hitObject.tag == "A" || hitObject.tag == "B" || hitObject.tag == "C" || hitObject.tag == "D") ){
 					_touchBg = GameObject.Find("battle_" + hitObject.tag);
 					if( hitObject.tag[0]-'A'+1 == Question.questions[_questionNumber].answer ){
@@ -163,8 +163,6 @@ public class GameController : MonoBehaviour {
 					else{
 						_state = State.AnswerWrong;
 					}
-
-					print (_state);
 				}
 			}
 		}
@@ -226,6 +224,7 @@ public class GameController : MonoBehaviour {
 				else{
 					_timer = 0;
 					Destroy( _nowMonster );
+					Character.score += 1;
 					planeGround.GetComponent<Animator>().enabled = true;
 					_state = State.Running;
 				}
