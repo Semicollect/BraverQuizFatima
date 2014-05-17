@@ -583,7 +583,7 @@ GameObject:
   - 131: {fileID: 1018595483}
   m_Layer: 0
   m_Name: battle_A
-  m_TagString: Untagged
+  m_TagString: A
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -614,7 +614,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1018595482}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: .5, z: 1}
+  m_LocalPosition: {x: -2, y: .5, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1955219250}
@@ -776,7 +776,7 @@ GameObject:
   - 131: {fileID: 1345822253}
   m_Layer: 0
   m_Name: battle_B
-  m_TagString: Untagged
+  m_TagString: B
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -949,7 +949,7 @@ GameObject:
   - 131: {fileID: 1919577054}
   m_Layer: 0
   m_Name: battle_D
-  m_TagString: Untagged
+  m_TagString: D
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1217,7 +1217,7 @@ GameObject:
   - 131: {fileID: 2125697038}
   m_Layer: 0
   m_Name: battle_C
-  m_TagString: Untagged
+  m_TagString: C
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
