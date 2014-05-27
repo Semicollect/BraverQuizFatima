@@ -80,6 +80,16 @@ public class GameController : MonoBehaviour {
 		if (_state == State.Running) {
 			++_timer;
 
+            if (Question.answerRightProblem >= Question.questions.Count)
+            {
+                foreach (var question in Question.questions)
+                {
+                    question.answerRight = false;
+                }
+                Question.answerRightProblem = 0;
+                Application.LoadLevel("grade");
+            }
+
 			if( _timer >= 60 ){
 				_state = State.MonsterAppear;
 			}
@@ -106,8 +116,11 @@ public class GameController : MonoBehaviour {
 	void DisplayQuestion(){
 		if (_state == State.DisplayQuestion) {
 			if( !_questionSelected ){
-				_questionNumber = Random.Range (0, Question.questions.Count-1);
-				Q.GetComponentInChildren<GUIText>().text = Question.questions[_questionNumber].statement;
+                do {
+				    _questionNumber = Random.Range (0, Question.questions.Count*2);
+                    _questionNumber = _questionNumber % Question.questions.Count;
+                } while (Question.questions[_questionNumber].answerRight);
+                Q.GetComponentInChildren<GUIText>().text = Question.questions[_questionNumber].statement;
 				A.GetComponentInChildren<GUIText>().text = Question.questions[_questionNumber].a;
 				B.GetComponentInChildren<GUIText>().text = Question.questions[_questionNumber].b;
 				C.GetComponentInChildren<GUIText>().text = Question.questions[_questionNumber].c;
@@ -247,6 +260,8 @@ public class GameController : MonoBehaviour {
 					_timer = 0;
                     enemyParticleExec = false;
 					Destroy( _nowMonster );
+                    Question.questions[_questionNumber].answerRight = true;
+                    Question.answerRightProblem++;
 					Character.score += 1;
 					planeGround.GetComponent<Animator>().enabled = true;
 					_state = State.Running;
@@ -262,6 +277,11 @@ public class GameController : MonoBehaviour {
 				sprite.color -= new Color(0, 0, 0, 0.1f);
 			}
 			else{
+                foreach (var question in Question.questions)
+                {
+                    question.answerRight = false;
+                }
+                Question.answerRightProblem = 0;
 				Application.LoadLevel("grade");
 			}
 		}
