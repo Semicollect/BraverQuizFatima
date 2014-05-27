@@ -649,6 +649,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 627939315}
   - 132: {fileID: 627939314}
+  - 114: {fileID: 627939316}
   m_Layer: 0
   m_Name: GUI Text_Q
   m_TagString: Untagged
@@ -672,7 +673,7 @@ GUIText:
   m_TabSize: 4
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Material: {fileID: 0}
-  m_FontSize: 20
+  m_FontSize: 11
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
@@ -690,6 +691,19 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 515920089}
+--- !u!114 &627939316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 627939313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8553209472cf4e7488655b5425550869, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0}
+  ratio: 25
 --- !u!1 &737937990
 GameObject:
   m_ObjectHideFlags: 0
@@ -1172,6 +1186,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1133022559}
   - 132: {fileID: 1133022558}
+  - 114: {fileID: 1133022560}
   m_Layer: 0
   m_Name: GUI Text_D
   m_TagString: D
@@ -1195,7 +1210,7 @@ GUIText:
   m_TabSize: 4
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Material: {fileID: 0}
-  m_FontSize: 20
+  m_FontSize: 11
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
@@ -1213,6 +1228,19 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1919577055}
+--- !u!114 &1133022560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1133022557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8553209472cf4e7488655b5425550869, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0}
+  ratio: 25
 --- !u!1 &1149399407
 GameObject:
   m_ObjectHideFlags: 0
@@ -1379,6 +1407,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1270867038}
   - 132: {fileID: 1270867037}
+  - 114: {fileID: 1270867039}
   m_Layer: 0
   m_Name: GUI Text_C
   m_TagString: C
@@ -1402,7 +1431,7 @@ GUIText:
   m_TabSize: 4
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Material: {fileID: 0}
-  m_FontSize: 20
+  m_FontSize: 11
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
@@ -1420,6 +1449,19 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2125697039}
+--- !u!114 &1270867039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1270867036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8553209472cf4e7488655b5425550869, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0}
+  ratio: 25
 --- !u!1 &1291342303
 GameObject:
   m_ObjectHideFlags: 0
@@ -2012,6 +2054,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1955219250}
   - 132: {fileID: 1955219251}
+  - 114: {fileID: 1955219252}
   m_Layer: 0
   m_Name: GUI Text_A
   m_TagString: A
@@ -2046,13 +2089,26 @@ GUIText:
   m_TabSize: 4
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Material: {fileID: 0}
-  m_FontSize: 20
+  m_FontSize: 11
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
   m_PixelCorrect: 1
   m_RichText: 1
+--- !u!114 &1955219252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1955219249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8553209472cf4e7488655b5425550869, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0}
+  ratio: 25
 --- !u!1 &1979100897
 GameObject:
   m_ObjectHideFlags: 0
@@ -2108,6 +2164,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1983124499}
   - 132: {fileID: 1983124500}
+  - 114: {fileID: 1983124501}
   m_Layer: 0
   m_Name: GUI Text_B
   m_TagString: B
@@ -2142,13 +2199,26 @@ GUIText:
   m_TabSize: 4
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Material: {fileID: 0}
-  m_FontSize: 20
+  m_FontSize: 11
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
   m_PixelCorrect: 1
   m_RichText: 1
+--- !u!114 &1983124501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1983124498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8553209472cf4e7488655b5425550869, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0}
+  ratio: 25
 --- !u!1 &2072383502
 GameObject:
   m_ObjectHideFlags: 0
