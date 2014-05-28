@@ -112,17 +112,9 @@ public class Question {
 		// questions.Add(new Question("請問下列不屬於征龍之路的\n舊16王？", "鐵王", "獸王", "教王", "夜王", 4));
 		questions.Add(new Question("請問下列哪個屬於有理數？", "自然對數", "正整數", "圓周率", "根號2", 2));
 		questions.Add(new Question("請問何者並非四書之一？", "論語", "孟子", "莊子", "大學", 3));
-<<<<<<< HEAD
 		questions.Add(new Question("請問下列並非日治時代的台灣\n總督？", "樺山資紀", "兒玉源太郎", "安藤利吉", "近藤勇", 4));
 		questions.Add(new Question("請問下列那位人物沒有擔任過\n行政院長？", "李宗仁", "孔祥熙", "張俊雄", "孫科", 1));
 		questions.Add(new Question("請問下列那條台灣河川的流域\n面積最大？", "淡水河", "濁水溪", "高屏溪", "基隆河", 3));
-=======
-		questions.Add(new Question("請問下列並非日治時代的台灣總督？", "樺山資紀", "兒玉源太郎", "安藤利吉", "近藤勇", 4));
-		questions.Add(new Question("請問下列那位人物沒有擔任過行政院長？", "李宗仁", "孔祥熙", "張俊雄", "孫科", 1));
-		questions.Add(new Question("請問下列那條台灣河川的流域面積最大？", "淡水河", "濁水溪", "高屏溪", "基隆河", 3));
-        */
-
->>>>>>> afbbd3cfdc65c7e293a9cf6b3afbbf61512c9d62
-
+		*/
 	}
 }

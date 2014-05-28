@@ -12,21 +12,6 @@ public class SelectCharacter : MonoBehaviour {
     private bool startSymbol = false;
     // Use this for initialization
 	void Start () {
-        if (PlayerPrefs.HasKey("Character"))
-        {
-            if (PlayerPrefs.GetString("Character") == "Archer")
-            {
-                Character.PlayerType = Character.Type.Archer;
-            }
-            else if( PlayerPrefs.GetString("Character") == "Knight" ){
-                Character.PlayerType = Character.Type.Knight;
-            }
-            else if (PlayerPrefs.GetString("Character") == "Magician")
-            {
-                Character.PlayerType = Character.Type.Magician;
-            }
-            Application.LoadLevel("MainPage");
-        }
         StartCoroutine(WaitToStart(1f));
 	}
 	

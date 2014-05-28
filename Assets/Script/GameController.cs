@@ -38,6 +38,16 @@ public class GameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		if (Question.stageName == "stage1") {
+
+		}
+		else if( Question.stageName == "stage2") {
+			planeGround.renderer.material.color = new Color( 14.0f/255.0f, 131.0f/255.0f, 29.0f/255.0f, 255.0f/255.0f );
+		}
+		else if (Question.stageName == "stage3") {
+			planeGround.renderer.material.color = new Color( 234.0f/255.0f, 47.0f/255.0f, 47.0f/255.0f, 255.0f/255.0f );
+		}
+
 		Character.score = 0;
 		if (Character.PlayerType != Character.Type.Knight) {
 			Destroy(knight);

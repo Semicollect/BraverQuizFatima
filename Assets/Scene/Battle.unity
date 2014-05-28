@@ -675,7 +675,7 @@ GUIText:
   m_TabSize: 4
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Material: {fileID: 0}
-  m_FontSize: 11
+  m_FontSize: 8
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
@@ -1212,7 +1212,7 @@ GUIText:
   m_TabSize: 4
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Material: {fileID: 0}
-  m_FontSize: 11
+  m_FontSize: 8
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
@@ -1433,7 +1433,7 @@ GUIText:
   m_TabSize: 4
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Material: {fileID: 0}
-  m_FontSize: 11
+  m_FontSize: 8
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
@@ -2177,7 +2177,7 @@ GUIText:
   m_TabSize: 4
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Material: {fileID: 0}
-  m_FontSize: 11
+  m_FontSize: 8
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
@@ -2287,7 +2287,7 @@ GUIText:
   m_TabSize: 4
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Material: {fileID: 0}
-  m_FontSize: 11
+  m_FontSize: 8
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
