@@ -621,6 +621,8 @@ MonoBehaviour:
   magician: {fileID: 1149399407}
   monster: {fileID: 100000, guid: b2e331aa9c9653c4492a05723e51f8c9, type: 2}
   planeGround: {fileID: 348363121}
+  GameOver: {fileID: 100000, guid: c2f9733d907f295429bb758b0af3dcc5, type: 2}
+  StageClear: {fileID: 100000, guid: 6d37d3b47753eaa4e93f44bdbb014e81, type: 2}
   enemyParticle: {fileID: 813857598}
   playerParticle: {fileID: 942679828}
   lifeBar: {fileID: 1650780707}
