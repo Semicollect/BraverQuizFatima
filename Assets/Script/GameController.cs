@@ -14,6 +14,11 @@ public class GameController : MonoBehaviour {
 	public GameObject monster;
 	public GameObject planeGround;
 
+    public GameObject GameOver;
+    private bool gameOverAnimationEnd = false;
+    public GameObject StageClear;
+    private bool stageClearAnimationEnd = false;
+
     public GameObject enemyParticle;
     private bool enemyParticleExec = false;
     public GameObject playerParticle;
@@ -33,7 +38,6 @@ public class GameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Question.CreateQuestions ();
 		Character.score = 0;
 		if (Character.PlayerType != Character.Type.Knight) {
 			Destroy(knight);
@@ -78,11 +82,42 @@ public class GameController : MonoBehaviour {
 
 	void Running(){
 		if (_state == State.Running) {
-			++_timer;
+            if (!stageClearAnimationEnd)
+            {
+                ++_timer;
 
-			if( _timer >= 60 ){
-				_state = State.MonsterAppear;
-			}
+                if (Question.answerRightProblem >= Question.questions.Count)
+                {
+                    foreach (var question in Question.questions)
+                    {
+                        question.answerRight = false;
+                    }
+                    Question.answerRightProblem = 0;
+                    Instantiate(StageClear);
+                    stageClearAnimationEnd = true;
+                    PlayerPrefs.SetInt(Question.stageName, 1);
+                }
+
+                if (_timer >= 60)
+                {
+                    _state = State.MonsterAppear;
+                }
+            }
+            else
+            {
+                if (Input.touchCount > 0)
+                {
+                    Touch touch = Input.touches[0];
+                    if (touch.phase == TouchPhase.Began)
+                    {
+                        Application.LoadLevel("MainPage");
+                    }
+                }
+                if (Input.GetMouseButtonUp(0))
+                {
+                    Application.LoadLevel("MainPage");
+                }
+            }
 		}
 	}
 
@@ -106,8 +141,11 @@ public class GameController : MonoBehaviour {
 	void DisplayQuestion(){
 		if (_state == State.DisplayQuestion) {
 			if( !_questionSelected ){
-				_questionNumber = Random.Range (0, Question.questions.Count-1);
-				Q.GetComponentInChildren<GUIText>().text = Question.questions[_questionNumber].statement;
+                do {
+				    _questionNumber = Random.Range (0, Question.questions.Count*2);
+                    _questionNumber = _questionNumber % Question.questions.Count;
+                } while (Question.questions[_questionNumber].answerRight);
+                Q.GetComponentInChildren<GUIText>().text = Question.questions[_questionNumber].statement;
 				A.GetComponentInChildren<GUIText>().text = Question.questions[_questionNumber].a;
 				B.GetComponentInChildren<GUIText>().text = Question.questions[_questionNumber].b;
 				C.GetComponentInChildren<GUIText>().text = Question.questions[_questionNumber].c;
@@ -247,6 +285,8 @@ public class GameController : MonoBehaviour {
 					_timer = 0;
                     enemyParticleExec = false;
 					Destroy( _nowMonster );
+                    Question.questions[_questionNumber].answerRight = true;
+                    Question.answerRightProblem++;
 					Character.score += 1;
 					planeGround.GetComponent<Animator>().enabled = true;
 					_state = State.Running;
@@ -261,9 +301,31 @@ public class GameController : MonoBehaviour {
 			if( sprite.color.a > 0 ){
 				sprite.color -= new Color(0, 0, 0, 0.1f);
 			}
-			else{
-				Application.LoadLevel("grade");
-			}
+            else if (!gameOverAnimationEnd)
+            {
+                foreach (var question in Question.questions)
+                {
+                    question.answerRight = false;
+                }
+                Question.answerRightProblem = 0;
+                Instantiate(GameOver);
+                gameOverAnimationEnd = true;
+            }
+            else
+            {
+                if (Input.touchCount > 0)
+                {
+                    Touch touch = Input.touches[0];
+                    if (touch.phase == TouchPhase.Began)
+                    {
+                        Application.LoadLevel("MainPage");
+                    }
+                }
+                if (Input.GetMouseButtonUp(0))
+                {
+                    Application.LoadLevel("MainPage");
+                }
+            }
 		}
 	}
 }
