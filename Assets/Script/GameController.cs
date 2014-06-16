@@ -36,8 +36,10 @@ public class GameController : MonoBehaviour {
 	private int _questionNumber = 0;
 	private GameObject _touchBg;
 
+    private Data _data;
 	// Use this for initialization
 	void Start () {
+        _data = Data.GetInstance();
 		if (Question.stageName == "stage1") {
 
 		}
@@ -48,14 +50,16 @@ public class GameController : MonoBehaviour {
 			planeGround.renderer.material.color = new Color( 234.0f/255.0f, 47.0f/255.0f, 47.0f/255.0f, 255.0f/255.0f );
 		}
 
-		Character.score = 0;
-		if (Character.PlayerType != Character.Type.Knight) {
+		// Character.score = 0;
+		if (_data.Character.IsDestroy(knight)) {
 			Destroy(knight);
 		}
-		if (Character.PlayerType != Character.Type.Archer) {
+        if (_data.Character.IsDestroy(archer))
+        {
 			Destroy(archer);
 		}
-		if (Character.PlayerType != Character.Type.Magician) {
+        if (_data.Character.IsDestroy(magician))
+        {
 			Destroy(magician);
 		}
 		//player.GetComponent<SpriteRenderer>().sprite = knightSprite;
@@ -297,7 +301,7 @@ public class GameController : MonoBehaviour {
 					Destroy( _nowMonster );
                     Question.questions[_questionNumber].answerRight = true;
                     Question.answerRightProblem++;
-					Character.score += 1;
+					//Character.score += 1;
 					planeGround.GetComponent<Animator>().enabled = true;
 					_state = State.Running;
 				}

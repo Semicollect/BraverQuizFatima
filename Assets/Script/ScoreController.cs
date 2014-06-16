@@ -10,6 +10,7 @@ public class ScoreController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        /*
 		if (!PlayerPrefs.HasKey ("Knight")) {
 			PlayerPrefs.SetInt("Knight", 0);
 		}
@@ -30,11 +31,12 @@ public class ScoreController : MonoBehaviour {
 		knightScore.guiText.text = PlayerPrefs.GetInt("Knight").ToString();
 		archerScore.guiText.text = PlayerPrefs.GetInt("Archer").ToString();
 		magicianScore.guiText.text = PlayerPrefs.GetInt ("Magician").ToString();
-
+        */
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        /*
 		if ( Input.GetMouseButtonUp(0) || Input.touchCount > 0 ) {
 			GUILayer hit = Camera.main.GetComponent<GUILayer>();
 			GUIElement hitObject;
@@ -45,5 +47,6 @@ public class ScoreController : MonoBehaviour {
 				Application.LoadLevel("SelectCharacter");
 			}
 		}
+         */
 	}
 }

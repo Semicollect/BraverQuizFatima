@@ -10,8 +10,10 @@ public class SelectCharacter : MonoBehaviour {
 	private GameObject touchBg;
 	private bool fadeOut = false;
     private bool startSymbol = false;
+    private Data _data;
     // Use this for initialization
 	void Start () {
+        _data = Data.GetInstance();
         StartCoroutine(WaitToStart(1f));
 	}
 	
@@ -49,20 +51,26 @@ public class SelectCharacter : MonoBehaviour {
                         case "knight":
                             Destroy(archerBg); Destroy(archerPeople); Destroy(archerFont);
                             Destroy(magicianBg); Destroy(magicianPeople); Destroy(magicianFont);
-                            Character.PlayerType = Character.Type.Knight;
-                            PlayerPrefs.SetString("Character", "Knight");
+                            _data.Character = new Knight();
+                            _data.Rank = 0;
+                            _data.Exp = 0;
+                            _data.Save();
                             break;
                         case "archer":
                             Destroy(knightBg); Destroy(knightPeople); Destroy(knightFont);
                             Destroy(magicianBg); Destroy(magicianPeople); Destroy(magicianFont);
-                            Character.PlayerType = Character.Type.Archer;
-                            PlayerPrefs.SetString("Character", "Archer");
+                            _data.Character = new Archer();
+                            _data.Rank = 0;
+                            _data.Exp = 0;
+                            _data.Save();
                             break;
                         case "magician":
                             Destroy(archerBg); Destroy(archerPeople); Destroy(archerFont);
                             Destroy(knightBg); Destroy(knightPeople); Destroy(knightFont);
-                            Character.PlayerType = Character.Type.Magician;
-                            PlayerPrefs.SetString("Character", "Magician");
+                            _data.Character = new Magician();
+                            _data.Rank = 0;
+                            _data.Exp = 0;
+                            _data.Save();
                             break;
                     }
 

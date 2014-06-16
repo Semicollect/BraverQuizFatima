@@ -3,9 +3,11 @@ using System.Collections;
 
 public class TouchToStartScript : MonoBehaviour {
 
+    private Data _data;
+
 	// Use this for initialization
 	void Start () {
-	
+        _data = Data.GetInstance();
 	}
 	
 	// Update is called once per frame
@@ -13,19 +15,9 @@ public class TouchToStartScript : MonoBehaviour {
 		if (Input.touchCount > 0) {
 			Touch touch = Input.touches [0];
 			if( touch.phase == TouchPhase.Began && guiTexture.HitTest(touch.position)){
-				if (PlayerPrefs.HasKey("Character"))
+				if (PlayerPrefs.HasKey("CharacterType"))
 				{
-					if (PlayerPrefs.GetString("Character") == "Archer")
-					{
-						Character.PlayerType = Character.Type.Archer;
-					}
-					else if( PlayerPrefs.GetString("Character") == "Knight" ){
-						Character.PlayerType = Character.Type.Knight;
-					}
-					else if (PlayerPrefs.GetString("Character") == "Magician")
-					{
-						Character.PlayerType = Character.Type.Magician;
-					}
+                    _data.Load();
 					Application.LoadLevel("MainPage");
 				}
 				else Application.LoadLevel("SelectCharacter");
@@ -33,19 +25,9 @@ public class TouchToStartScript : MonoBehaviour {
 		}
 		if (Input.GetMouseButtonUp (0)) {
 			if( guiTexture.HitTest(Input.mousePosition) ){
-				if (PlayerPrefs.HasKey("Character"))
+                if (PlayerPrefs.HasKey("CharacterType"))
 				{
-					if (PlayerPrefs.GetString("Character") == "Archer")
-					{
-						Character.PlayerType = Character.Type.Archer;
-					}
-					else if( PlayerPrefs.GetString("Character") == "Knight" ){
-						Character.PlayerType = Character.Type.Knight;
-					}
-					else if (PlayerPrefs.GetString("Character") == "Magician")
-					{
-						Character.PlayerType = Character.Type.Magician;
-					}
+                    _data.Load();
 					Application.LoadLevel("MainPage");
 				}
 				else Application.LoadLevel("SelectCharacter");
