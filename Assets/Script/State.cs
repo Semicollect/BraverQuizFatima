@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public abstract class State : MonoBehaviour
 {
     public State() { }
@@ -32,14 +33,22 @@ public class Running : State
         {
             ++controller.Timer;
 
-            if (Question.answerRightProblem >= Question.questions.Count)
+            if (controller.killMonsterCount <= 0)
             {
-                foreach (var question in Question.questions)
-                {
-                    question.answerRight = false;
-                }
-                Question.answerRightProblem = 0;
                 Instantiate(controller.StageClear);
+                (Instantiate(controller.GetExp) as GameObject).guiText.text += "  " + controller.getExp;
+                controller.data.Exp += controller.getExp;
+                if (controller.data.Exp >= Data.needExp[controller.data.Rank])
+                {
+                    ++controller.data.Rank;
+                    Instantiate(controller.Rankup);
+                    controller.data.Character.Upgrade();
+                    controller.data.Point += 10;
+                }
+                (Instantiate(controller.GetMoney) as GameObject).guiText.text += "  " + controller.getMoney;
+                controller.data.Money += controller.getMoney;
+                Instantiate(controller.TouchExit);
+                controller.data.Save();
                 controller.stageClearAnimationEnd = true;
                 PlayerPrefs.SetInt(Question.stageName, 1);
             }
@@ -74,7 +83,7 @@ public class MonsterAppear : State
     {
         if (controller.nowMonster == null)
         {
-            controller.nowMonster = new Monster(100, 30);
+            controller.nowMonster = new Monster(100, 30, 100, 10000);
             (controller.nowMonster.obj = (Object.Instantiate(controller.monster) as GameObject)).transform.position = new Vector3(4.45f, 1.40f, 17f);
             controller.nowMonster.obj.renderer.material.color = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f));
             controller.planeGround.GetComponent<Animator>().enabled = false;
@@ -103,6 +112,8 @@ public class DisplayQuestion : State
             controller.questionNumber = controller.questionNumber % Question.questions.Count;
             while (Question.questions[controller.questionNumber].answerRight)
             {
+                ++controller.questionNumber;
+                controller.questionNumber %= Question.questions.Count;
             }
 
             controller.Q.GetComponentInChildren<GUIText>().text = Question.questions[controller.questionNumber].statement;
@@ -211,11 +222,15 @@ public class AnswerRight : State
                     controller.Timer = 0;
                     controller.enemyParticleExec = false;
                     Destroy(controller.nowMonster.obj);
+                    controller.getExp += controller.nowMonster.getExp;
+                    controller.getMoney += controller.nowMonster.getMoney;
                     controller.nowMonster = null;
                     Question.questions[controller.questionNumber].answerRight = true;
                     Question.answerRightProblem++;
                     //Character.score += 1;
                     controller.planeGround.GetComponent<Animator>().enabled = true;
+                    --controller.killMonsterCount;
+
                     controller.State = new Running();
                 }
             }
@@ -224,7 +239,19 @@ public class AnswerRight : State
                 controller.enemyParticleExec = false;
                 Question.questions[controller.questionNumber].answerRight = true;
                 Question.answerRightProblem++;
-                controller.State = new DisplayQuestion();
+                controller.State = new MonsterAppear();
+            }
+
+            if (Question.answerRightProblem >= Question.questions.Count)
+            {
+                foreach (var question in Question.questions)
+                {
+                    question.answerRight = false;
+                }
+                Question.answerRightProblem = 0;
+                //Instantiate(controller.StageClear);
+                //controller.stageClearAnimationEnd = true;
+                //PlayerPrefs.SetInt(Question.stageName, 1);
             }
         }
     }
@@ -273,14 +300,91 @@ public class PlayerDead : State
         {
             sprite.color -= new Color(0, 0, 0, 0.1f);
         }
-        else if (!controller.gameOverAnimationEnd)
+        else if (controller.data.LifePoison > 0)
         {
+            controller.State = new SelectToUseLifePoison();
+        }
+        else{
+            controller.State = new PlayerCompleteDead();
+        }
+    }
+}
+
+public class SelectToUseLifePoison : State
+{
+    GameObject usePoison = null;
+    GameObject yes = null, no = null;
+
+    public override void Execute(GameController controller)
+    {
+        if (usePoison == null)
+        {
+            usePoison = Instantiate(controller.UsePoison) as GameObject;
+            usePoison.guiText.text = "您尚有" + controller.data.LifePoison + "瓶復活藥，要使用嗎？";
+            yes = Instantiate(controller.Yes) as GameObject;
+            no = Instantiate(controller.No) as GameObject;
+        }
+        else
+        {
+            if (Input.GetMouseButtonUp(0) || Input.touchCount > 0)
+            {
+                GUILayer hit = Camera.main.GetComponent<GUILayer>();
+                GUIElement hitObject;
+                if (Input.GetMouseButtonUp(0)) hitObject = hit.HitTest(Input.mousePosition);
+                else hitObject = hit.HitTest(Input.touches[0].position);
+
+                if (hitObject != null) print(hitObject.name);
+
+                if (hitObject != null && hitObject.name == yes.name)
+                {
+                    --controller.data.LifePoison;
+                    SpriteRenderer sprite = controller.player.GetComponentInChildren<SpriteRenderer>();
+                    sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 1f);
+                    Destroy(usePoison);
+                    Destroy(yes);
+                    Destroy(no);
+                    controller.nowHP = controller.data.Character.HP;
+                    controller.lifeBar.transform.position = new Vector3(0.5f, controller.lifeBar.transform.position.y, controller.lifeBar.transform.position.z);
+                    controller.State = new MonsterAppear();
+                }
+                if (hitObject != null && hitObject.name == no.name)
+                {
+                    Destroy(usePoison);
+                    Destroy(yes);
+                    Destroy(no);
+                    controller.State = new PlayerCompleteDead();
+                }
+            }
+        }
+    }
+}
+
+public class PlayerCompleteDead : State {
+
+    public override void Execute(GameController controller)
+    {
+        if (!controller.gameOverAnimationEnd)
+        {
+
             foreach (var question in Question.questions)
             {
                 question.answerRight = false;
             }
             Question.answerRightProblem = 0;
             Instantiate(controller.GameOver);
+            (Instantiate(controller.GetExp) as GameObject).guiText.text += "  " + controller.getExp;
+            controller.data.Exp += controller.getExp;
+            if (controller.data.Exp >= Data.needExp[controller.data.Rank])
+            {
+                ++controller.data.Rank;
+                Instantiate(controller.Rankup);
+                controller.data.Character.Upgrade();
+                controller.data.Point += 10;
+            }
+            (Instantiate(controller.GetMoney) as GameObject).guiText.text += "  " + controller.getMoney;
+            controller.data.Money += controller.getMoney;
+            Instantiate(controller.TouchExit);
+            controller.data.Save();
             controller.gameOverAnimationEnd = true;
         }
         else

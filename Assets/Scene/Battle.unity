@@ -629,6 +629,13 @@ MonoBehaviour:
   gameOverAnimationEnd: 0
   StageClear: {fileID: 100000, guid: 6d37d3b47753eaa4e93f44bdbb014e81, type: 2}
   stageClearAnimationEnd: 0
+  GetExp: {fileID: 100000, guid: b5bd865b39642804e8cf696e75877d2a, type: 2}
+  GetMoney: {fileID: 100000, guid: e498daf4054f5d649bd919fcab3dd29d, type: 2}
+  TouchExit: {fileID: 100000, guid: f4d6310dd9a03934e936935e32b42305, type: 2}
+  Rankup: {fileID: 100000, guid: a57de4f863acb924b9017efbec831052, type: 2}
+  UsePoison: {fileID: 100000, guid: 16a0759041df39b49a825b569af8ebc9, type: 2}
+  Yes: {fileID: 100000, guid: 5377705cad58d88418b403f32a90e96e, type: 2}
+  No: {fileID: 100000, guid: 5e201b3580158ea48a585c0065de6b52, type: 2}
   enemyParticle: {fileID: 813857598}
   enemyParticleExec: 0
   playerParticle: {fileID: 942679828}
@@ -645,6 +652,9 @@ MonoBehaviour:
   questionNumber: 0
   touchBg: {fileID: 0}
   nowHP: 0
+  killMonsterCount: 5
+  getExp: 0
+  getMoney: 0
 --- !u!4 &580446978
 Transform:
   m_ObjectHideFlags: 0
@@ -689,7 +699,7 @@ GUIText:
   m_TabSize: 4
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Material: {fileID: 0}
-  m_FontSize: 11
+  m_FontSize: 16
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
@@ -1316,7 +1326,7 @@ GUIText:
   m_TabSize: 4
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Material: {fileID: 0}
-  m_FontSize: 11
+  m_FontSize: 16
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
@@ -1583,7 +1593,7 @@ GUIText:
   m_TabSize: 4
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Material: {fileID: 0}
-  m_FontSize: 11
+  m_FontSize: 16
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
@@ -1802,7 +1812,7 @@ GameObject:
   - 4: {fileID: 1613241596}
   - 132: {fileID: 1613241595}
   m_Layer: 0
-  m_Name: GUI Text
+  m_Name: HP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2327,7 +2337,7 @@ GUIText:
   m_TabSize: 4
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Material: {fileID: 0}
-  m_FontSize: 11
+  m_FontSize: 16
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
@@ -2437,7 +2447,7 @@ GUIText:
   m_TabSize: 4
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Material: {fileID: 0}
-  m_FontSize: 11
+  m_FontSize: 16
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2

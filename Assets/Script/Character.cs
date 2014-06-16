@@ -9,7 +9,7 @@ public abstract class Character {
         Atk = atk;
     }
 
-   
+    public abstract void Upgrade();
     public abstract void SaveType();
     public void Save()
     {
@@ -23,7 +23,7 @@ public abstract class Character {
 
 public class Knight : Character
 {
-    public Knight() : base(100, 50) { }
+    public Knight() : base(100, 60) { }
 
     public override bool IsDestroy(GameObject obj)
     {
@@ -38,6 +38,12 @@ public class Knight : Character
     public override void SaveType()
     {
         PlayerPrefs.SetString("CharacterType", "knight");
+    }
+
+    public override void Upgrade()
+    {
+        HP += 30;
+        Atk += 10;
     }
 }
 
@@ -59,11 +65,17 @@ public class Archer : Character
     {
         PlayerPrefs.SetString("CharacterType", "archer");
     }
+
+    public override void Upgrade()
+    {
+        HP += 20;
+        Atk += 20;
+    }
 }
 
 public class Magician : Character
 {
-    public Magician() : base(50, 100) { }
+    public Magician() : base(60, 100) { }
 
     public override bool IsDestroy(GameObject obj)
     {
@@ -78,6 +90,12 @@ public class Magician : Character
     public override void SaveType()
     {
         PlayerPrefs.SetString("CharacterType", "magician");
+    }
+
+    public override void Upgrade()
+    {
+        HP += 10;
+        Atk += 30;
     }
 }
 

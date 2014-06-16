@@ -15,6 +15,7 @@ public class Question {
     public static List<Question> stage1, stage2, stage3;
     public static string stageName;
     public static int answerRightProblem = 0;
+
 	public Question(string statement, string a, string b, string c, string d, int answer){
 		this.statement = statement;
 		this.a = a;
@@ -50,6 +51,7 @@ public class Question {
         stage1.Add(new Question("請問下列並非日治時代的台灣總督？", "樺山資紀", "兒玉源太郎", "安藤利吉", "近藤勇", 4));
         stage1.Add(new Question("請問下列那位人物沒有擔任過行政院長？", "李宗仁", "孔祥熙", "張俊雄", "孫科", 1));
         stage1.Add(new Question("請問下列那條台灣河川的流域面積最大？", "淡水河", "濁水溪", "高屏溪", "基隆河", 3));
+
 
         stage2 = new List<Question>();
 

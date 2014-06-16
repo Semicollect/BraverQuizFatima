@@ -7,7 +7,7 @@ public class SetStageComplete : MonoBehaviour {
 	void Start () {
         if (PlayerPrefs.HasKey(this.name))
         {
-            guiTexture.color = new Color(44.0f / 255.0f, 201.0f / 255.0f, 91.0f / 255.0f, 128.0f / 255.0f);
+            guiTexture.color = new Color(44.0f / 255.0f, 201.0f / 255.0f, 91.0f / 255.0f, 128.0f / 255.0f); 
         }
 	}
 	

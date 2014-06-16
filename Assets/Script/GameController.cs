@@ -19,6 +19,13 @@ public class GameController : MonoBehaviour {
     public GameObject StageClear;
     public bool stageClearAnimationEnd = false;
 
+    public GameObject GetExp;
+    public GameObject GetMoney;
+    public GameObject TouchExit;
+    public GameObject Rankup;
+    public GameObject UsePoison;
+    public GameObject Yes, No;
+
     public GameObject enemyParticle;
     public bool enemyParticleExec = false;
     public GameObject playerParticle;
@@ -38,11 +45,19 @@ public class GameController : MonoBehaviour {
 
     public Data data;
     public int nowHP;
+
+    public int killMonsterCount = 5;
+    public int getExp = 0;
+    public int getMoney = 0;
 	// Use this for initialization
 	void Start () {
         State = new BattleStart();
         data = Data.GetInstance();
         nowHP = data.Character.HP;
+
+        killMonsterCount = 5;
+        getExp = 0;
+        getMoney = 0;
 		if (Question.stageName == "stage1") {
 
 		}

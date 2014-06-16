@@ -46,30 +46,29 @@ public class SelectCharacter : MonoBehaviour {
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit))
                 {
+                    _data.Rank = 0;
+                    _data.Exp = 0;
+                    _data.Money = 0;
+                    _data.Point = 0;
+
                     switch (hit.collider.gameObject.tag.ToLower())
                     {
                         case "knight":
                             Destroy(archerBg); Destroy(archerPeople); Destroy(archerFont);
                             Destroy(magicianBg); Destroy(magicianPeople); Destroy(magicianFont);
                             _data.Character = new Knight();
-                            _data.Rank = 0;
-                            _data.Exp = 0;
                             _data.Save();
                             break;
                         case "archer":
                             Destroy(knightBg); Destroy(knightPeople); Destroy(knightFont);
                             Destroy(magicianBg); Destroy(magicianPeople); Destroy(magicianFont);
                             _data.Character = new Archer();
-                            _data.Rank = 0;
-                            _data.Exp = 0;
                             _data.Save();
                             break;
                         case "magician":
                             Destroy(archerBg); Destroy(archerPeople); Destroy(archerFont);
                             Destroy(knightBg); Destroy(knightPeople); Destroy(knightFont);
                             _data.Character = new Magician();
-                            _data.Rank = 0;
-                            _data.Exp = 0;
                             _data.Save();
                             break;
                     }
