@@ -74,13 +74,14 @@ public class MonsterAppear : State
     {
         if (controller.nowMonster == null)
         {
-            (controller.nowMonster = (Object.Instantiate(controller.monster) as GameObject)).transform.position = new Vector3(4.45f, 1.40f, 17f);
-            controller.nowMonster.renderer.material.color = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f));
+            controller.nowMonster = new Monster(100, 30);
+            (controller.nowMonster.obj = (Object.Instantiate(controller.monster) as GameObject)).transform.position = new Vector3(4.45f, 1.40f, 17f);
+            controller.nowMonster.obj.renderer.material.color = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f));
             controller.planeGround.GetComponent<Animator>().enabled = false;
         }
-        else if (controller.nowMonster.transform.position.x > 1.1f)
+        else if (controller.nowMonster.obj.transform.position.x > 1.1f)
         {
-            controller.nowMonster.transform.position -= new Vector3(0.1f, 0, 0);
+            controller.nowMonster.obj.transform.position -= new Vector3(0.1f, 0, 0);
         }
         else
         {
@@ -97,11 +98,13 @@ public class DisplayQuestion : State
     {
         if (!controller.questionSelected)
         {
-            do
+            
+            controller.questionNumber = Random.Range(0, Question.questions.Count * 2);
+            controller.questionNumber = controller.questionNumber % Question.questions.Count;
+            while (Question.questions[controller.questionNumber].answerRight)
             {
-                controller.questionNumber = Random.Range(0, Question.questions.Count * 2);
-                controller.questionNumber = controller.questionNumber % Question.questions.Count;
-            } while (Question.questions[controller.questionNumber].answerRight);
+            }
+
             controller.Q.GetComponentInChildren<GUIText>().text = Question.questions[controller.questionNumber].statement;
             controller.A.GetComponentInChildren<GUIText>().text = Question.questions[controller.questionNumber].a;
             controller.B.GetComponentInChildren<GUIText>().text = Question.questions[controller.questionNumber].b;
@@ -195,21 +198,33 @@ public class AnswerRight : State
             {
                 controller.enemyParticle.particleEmitter.Emit();
                 controller.enemyParticleExec = true;
+                controller.nowMonster.HP -= controller.data.Character.Atk;
             }
-            if (controller.nowMonster.renderer.material.color.a > 0)
+            if (controller.nowMonster.HP <= 0)
             {
-                controller.nowMonster.renderer.material.color -= new Color(0, 0, 0, 0.1f);
+                if (controller.nowMonster.obj.renderer.material.color.a > 0)
+                {
+                    controller.nowMonster.obj.renderer.material.color -= new Color(0, 0, 0, 0.1f);
+                }
+                else
+                {
+                    controller.Timer = 0;
+                    controller.enemyParticleExec = false;
+                    Destroy(controller.nowMonster.obj);
+                    controller.nowMonster = null;
+                    Question.questions[controller.questionNumber].answerRight = true;
+                    Question.answerRightProblem++;
+                    //Character.score += 1;
+                    controller.planeGround.GetComponent<Animator>().enabled = true;
+                    controller.State = new Running();
+                }
             }
             else
             {
-                controller.Timer = 0;
                 controller.enemyParticleExec = false;
-                Destroy(controller.nowMonster);
                 Question.questions[controller.questionNumber].answerRight = true;
                 Question.answerRightProblem++;
-                //Character.score += 1;
-                controller.planeGround.GetComponent<Animator>().enabled = true;
-                controller.State = new Running();
+                controller.State = new DisplayQuestion();
             }
         }
     }
@@ -225,7 +240,8 @@ public class AnswerWrong : State
             if (!controller.playerParticleExec)
             {
                 controller.playerParticle.particleEmitter.Emit();
-                controller.lifeValue = 0.4f;
+                controller.lifeValue = (float)controller.nowMonster.Atk / (float)controller.data.Character.HP;
+                controller.nowHP -= controller.nowMonster.Atk;
                 controller.playerParticleExec = true;
             }
             if (controller.lifeValue > 0)
@@ -233,7 +249,7 @@ public class AnswerWrong : State
                 controller.lifeBar.transform.Translate(-0.025f, 0, 0);
                 controller.lifeValue -= 0.025f;
             }
-            else if (controller.lifeBar.transform.position.x < -0.5f)
+            else if (controller.nowHP < 0)
             {
                 controller.playerParticleExec = false;
                 controller.State = new PlayerDead();

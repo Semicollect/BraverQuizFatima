@@ -7,7 +7,6 @@ public class GameController : MonoBehaviour {
     public State State = new BattleStart();
     public bool answerRight = false;
 
-
     public GameObject player;
 	public GameObject knight;
 	public GameObject archer;
@@ -31,16 +30,19 @@ public class GameController : MonoBehaviour {
 
 	public GameObject Q, A, B, C, D;
 
-	public GameObject nowMonster = null;
+	public Monster nowMonster = null;
     public int Timer = 0;
 	public bool questionSelected = false;
 	public int questionNumber = 0;
 	public GameObject touchBg;
 
-    private Data _data;
+    public Data data;
+    public int nowHP;
 	// Use this for initialization
 	void Start () {
-        _data = Data.GetInstance();
+        State = new BattleStart();
+        data = Data.GetInstance();
+        nowHP = data.Character.HP;
 		if (Question.stageName == "stage1") {
 
 		}
@@ -52,14 +54,14 @@ public class GameController : MonoBehaviour {
 		}
 
 		// Character.score = 0;
-		if (_data.Character.IsDestroy(knight)) {
+		if (data.Character.IsDestroy(knight)) {
 			Destroy(knight);
 		}
-        if (_data.Character.IsDestroy(archer))
+        if (data.Character.IsDestroy(archer))
         {
 			Destroy(archer);
 		}
-        if (_data.Character.IsDestroy(magician))
+        if (data.Character.IsDestroy(magician))
         {
 			Destroy(magician);
 		}

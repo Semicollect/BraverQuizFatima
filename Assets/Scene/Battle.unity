@@ -617,6 +617,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd7629948a5aa5c4ab4f77b6802118bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  State: {fileID: 0}
+  answerRight: 0
   player: {fileID: 944253702}
   knight: {fileID: 421091866}
   archer: {fileID: 957867979}
@@ -624,15 +626,25 @@ MonoBehaviour:
   monster: {fileID: 100000, guid: b2e331aa9c9653c4492a05723e51f8c9, type: 2}
   planeGround: {fileID: 348363121}
   GameOver: {fileID: 100000, guid: c2f9733d907f295429bb758b0af3dcc5, type: 2}
+  gameOverAnimationEnd: 0
   StageClear: {fileID: 100000, guid: 6d37d3b47753eaa4e93f44bdbb014e81, type: 2}
+  stageClearAnimationEnd: 0
   enemyParticle: {fileID: 813857598}
+  enemyParticleExec: 0
   playerParticle: {fileID: 942679828}
+  playerParticleExec: 0
+  lifeValue: 0
   lifeBar: {fileID: 1650780707}
   Q: {fileID: 515920087}
   A: {fileID: 1018595482}
   B: {fileID: 1345822252}
   C: {fileID: 2125697037}
   D: {fileID: 1919577053}
+  Timer: 0
+  questionSelected: 0
+  questionNumber: 0
+  touchBg: {fileID: 0}
+  nowHP: 0
 --- !u!4 &580446978
 Transform:
   m_ObjectHideFlags: 0
